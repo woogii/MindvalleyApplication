@@ -15,6 +15,11 @@
 		B8CAF3EA1EA0F055003D8A64 /* Mindvalley_applicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF3E91EA0F055003D8A64 /* Mindvalley_applicationTests.swift */; };
 		B8CAF3F51EA0F055003D8A64 /* Mindvalley_applicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF3F41EA0F055003D8A64 /* Mindvalley_applicationUITests.swift */; };
 		B8CAF4071EA0F138003D8A64 /* MindvalleyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF4061EA0F138003D8A64 /* MindvalleyConstants.swift */; };
+		B8CAF40A1EA1D294003D8A64 /* MindvalleyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF4091EA1D294003D8A64 /* MindvalleyImage.swift */; };
+		B8CAF40E1EA204C9003D8A64 /* DiscardableImageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF40D1EA204C9003D8A64 /* DiscardableImageContent.swift */; };
+		B8CAF4101EA2118F003D8A64 /* ImageListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */; };
+		B8CAF4121EA21729003D8A64 /* sampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = B8CAF4111EA21729003D8A64 /* sampleData.json */; };
+		B8CAF4141EA2177F003D8A64 /* PostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF4131EA2177F003D8A64 /* PostInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		B8CAF3F41EA0F055003D8A64 /* Mindvalley_applicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mindvalley_applicationUITests.swift; sourceTree = "<group>"; };
 		B8CAF3F61EA0F055003D8A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8CAF4061EA0F138003D8A64 /* MindvalleyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindvalleyConstants.swift; sourceTree = "<group>"; };
+		B8CAF4091EA1D294003D8A64 /* MindvalleyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindvalleyImage.swift; sourceTree = "<group>"; };
+		B8CAF40D1EA204C9003D8A64 /* DiscardableImageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscardableImageContent.swift; sourceTree = "<group>"; };
+		B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageListCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8CAF4111EA21729003D8A64 /* sampleData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleData.json; sourceTree = "<group>"; };
+		B8CAF4131EA2177F003D8A64 /* PostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +89,7 @@
 		B8CAF3C81EA0F054003D8A64 = {
 			isa = PBXGroup;
 			children = (
+				B8CAF4081EA1D238003D8A64 /* ImageHandling */,
 				B8CAF3D31EA0F054003D8A64 /* Mindvalley application */,
 				B8CAF3E81EA0F054003D8A64 /* Mindvalley applicationTests */,
 				B8CAF3F31EA0F055003D8A64 /* Mindvalley applicationUITests */,
@@ -103,7 +114,6 @@
 				B8CAF4051EA0F10D003D8A64 /* Controller */,
 				B8CAF4041EA0F0FE003D8A64 /* View */,
 				B8CAF4031EA0F0F3003D8A64 /* Model */,
-				B8CAF3D61EA0F054003D8A64 /* ViewController.swift */,
 				B8CAF3D81EA0F054003D8A64 /* Main.storyboard */,
 				B8CAF4021EA0F0D6003D8A64 /* Supporting Files */,
 			);
@@ -135,6 +145,7 @@
 				B8CAF3DB1EA0F054003D8A64 /* Assets.xcassets */,
 				B8CAF3E01EA0F054003D8A64 /* Info.plist */,
 				B8CAF3DD1EA0F054003D8A64 /* LaunchScreen.storyboard */,
+				B8CAF4111EA21729003D8A64 /* sampleData.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -142,6 +153,8 @@
 		B8CAF4031EA0F0F3003D8A64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */,
+				B8CAF4131EA2177F003D8A64 /* PostInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -156,8 +169,18 @@
 		B8CAF4051EA0F10D003D8A64 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B8CAF3D61EA0F054003D8A64 /* ViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		B8CAF4081EA1D238003D8A64 /* ImageHandling */ = {
+			isa = PBXGroup;
+			children = (
+				B8CAF40D1EA204C9003D8A64 /* DiscardableImageContent.swift */,
+				B8CAF4091EA1D294003D8A64 /* MindvalleyImage.swift */,
+			);
+			name = ImageHandling;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +296,7 @@
 				B8CAF3DF1EA0F054003D8A64 /* LaunchScreen.storyboard in Resources */,
 				B8CAF3DC1EA0F054003D8A64 /* Assets.xcassets in Resources */,
 				B8CAF3DA1EA0F054003D8A64 /* Main.storyboard in Resources */,
+				B8CAF4121EA21729003D8A64 /* sampleData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +321,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8CAF4101EA2118F003D8A64 /* ImageListCollectionViewCell.swift in Sources */,
+				B8CAF4141EA2177F003D8A64 /* PostInfo.swift in Sources */,
+				B8CAF40A1EA1D294003D8A64 /* MindvalleyImage.swift in Sources */,
 				B8CAF4071EA0F138003D8A64 /* MindvalleyConstants.swift in Sources */,
+				B8CAF40E1EA204C9003D8A64 /* DiscardableImageContent.swift in Sources */,
 				B8CAF3D71EA0F054003D8A64 /* ViewController.swift in Sources */,
 				B8CAF3D51EA0F054003D8A64 /* AppDelegate.swift in Sources */,
 			);
@@ -552,6 +580,7 @@
 				B8CAF3FB1EA0F055003D8A64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B8CAF3FC1EA0F055003D8A64 /* Build configuration list for PBXNativeTarget "Mindvalley applicationTests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +589,7 @@
 				B8CAF3FE1EA0F055003D8A64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B8CAF3FF1EA0F055003D8A64 /* Build configuration list for PBXNativeTarget "Mindvalley applicationUITests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +598,7 @@
 				B8CAF4011EA0F055003D8A64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
