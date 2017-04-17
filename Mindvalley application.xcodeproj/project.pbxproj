@@ -153,7 +153,6 @@
 		B8CAF4031EA0F0F3003D8A64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */,
 				B8CAF4131EA2177F003D8A64 /* PostInfo.swift */,
 			);
 			name = Model;
@@ -162,6 +161,7 @@
 		B8CAF4041EA0F0FE003D8A64 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";

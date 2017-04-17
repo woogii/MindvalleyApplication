@@ -8,18 +8,24 @@
 
 import Foundation
 
+// MARK : - MindvalleyConstants
 
 struct MindvalleyConstants {
   
+
+  // MARK : - JSON Response Keys
   
   struct JSONResponseKeys {
+    
+    // MARK : - General Keys 
     
     static let Id         = "user"
     static let CreatedAt  = "created_at"
     static let LikesCount = "likes"
   
+    // MARK : - User Information
+    
     struct UserInfo {
-      
       
       static let User   = "user"
       static let Id =  "id"
@@ -29,6 +35,8 @@ struct MindvalleyConstants {
       static let ProfileLinks = "links"
       
     }
+    
+    // MARK : - URL Information
     
     struct UrlInfo {
       
@@ -40,6 +48,7 @@ struct MindvalleyConstants {
     
     }
     
+    // MARK : - Category Information
     
     struct CategoryInfo {
       

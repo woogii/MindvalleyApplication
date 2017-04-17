@@ -24,25 +24,67 @@ class ImageListCollectionViewCell: UICollectionViewCell {
     }
   }
   
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    applyCornerRadiusToBackgroundImageView()
+    applyCornerRadiusToProfileImageView()
+  
+  }
+  
+  func applyCornerRadiusToBackgroundImageView() {
+    backgroundImageView.layer.cornerRadius = 4
+    backgroundImageView.layer.masksToBounds = true
+  }
+  
+  func applyCornerRadiusToProfileImageView() {
+    profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+    profileImageView.layer.masksToBounds = true
+  }
+  
+  func setCreatorLabel() {
+    creatorLabel.text = postInfo.userName
+  }
   
   func updateCell() {
     
-    creatorLabel.text = postInfo.userName
-    
+    setCreatorLabel()
+
     MindvalleyImage.sharedInstance.requestImageWith(urlString: postInfo.backgroundImageUrlString!, completionHandler: { (result,error) in
       
       if error != nil {
         
       } else {
 
-        DispatchQueue.main.async {
+        if let data = result as? Data {
           
-          if let data = result as? Data {
-            if let image = UIImage(data: data) {
-              self.backgroundImageView.image = image
+          let backgroundImage = UIImage(data: data)
+          
+          MindvalleyImage.sharedInstance.requestImageWith(urlString: self.postInfo.profileImageUrlString, completionHandler: { (result,error) in
+            
+        
+            if let data = result as? Data {
+          
+              let profileImage = UIImage(data: data)
+              
+              DispatchQueue.main.async {
+                
+                self.backgroundImageView.image = backgroundImage
+                self.profileImageView.image = profileImage
+              }
+            
+              
             }
-          }
+          })
+          
+          
+          
         }
+        
+        
+        
+        
+        
       }
     })
     
