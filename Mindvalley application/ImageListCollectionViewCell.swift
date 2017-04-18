@@ -18,9 +18,18 @@ class ImageListCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var creatorLabel: UILabel!
   
-  var postInfo:PostInfo! {
+//  var postInfo:PostInfo! {
+//    didSet {
+//      updateCell()
+//    }
+//  }
+  
+  var taskToCancelifCellIsReused: URLSessionTask? {
+    
     didSet {
-      updateCell()
+      if let taskToCancel = oldValue {
+        taskToCancel.cancel()
+      }
     }
   }
   
@@ -33,60 +42,13 @@ class ImageListCollectionViewCell: UICollectionViewCell {
   }
   
   func applyCornerRadiusToBackgroundImageView() {
-    backgroundImageView.layer.cornerRadius = 4
+    backgroundImageView.layer.cornerRadius = MindvalleyConstants.ImageListCollectionViewCell.BackgroundImageViewCornerRadius
     backgroundImageView.layer.masksToBounds = true
   }
   
   func applyCornerRadiusToProfileImageView() {
-    profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+    profileImageView.layer.cornerRadius = MindvalleyConstants.ImageListCollectionViewCell.ProfileImageViewCornerRadius
     profileImageView.layer.masksToBounds = true
   }
   
-  func setCreatorLabel() {
-    creatorLabel.text = postInfo.userName
-  }
-  
-  func updateCell() {
-    
-    setCreatorLabel()
-
-    MindvalleyImage.sharedInstance.requestImageWith(urlString: postInfo.backgroundImageUrlString!, completionHandler: { (result,error) in
-      
-      if error != nil {
-        
-      } else {
-
-        if let data = result as? Data {
-          
-          let backgroundImage = UIImage(data: data)
-          
-          MindvalleyImage.sharedInstance.requestImageWith(urlString: self.postInfo.profileImageUrlString, completionHandler: { (result,error) in
-            
-        
-            if let data = result as? Data {
-          
-              let profileImage = UIImage(data: data)
-              
-              DispatchQueue.main.async {
-                
-                self.backgroundImageView.image = backgroundImage
-                self.profileImageView.image = profileImage
-              }
-            
-              
-            }
-          })
-          
-          
-          
-        }
-        
-        
-        
-        
-        
-      }
-    })
-    
-  }
 }

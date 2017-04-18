@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK : - MindvalleyImage
 
 open class MindvalleyImage {
@@ -16,43 +15,42 @@ open class MindvalleyImage {
   // MARK : - Properties
   
   open static let sharedInstance = MindvalleyImage()
-  open static let dataCache = NSCache<NSString,DiscardableDataContent>()
+  open static let dataCache = NSCache<NSString,DiscardableImageContent>()
   
-  // MARK : - Properties
   
-  func requestImageWith(urlString: String, completionHandler:@escaping (_ result:AnyObject?, _ error:Error?)->Void) {
+  // MARK: - All purpose method for requesting data
+  
+  func requestImageWith(urlString: String, size:Int?=nil, completionHandler: @escaping (_ result:AnyObject?, _ error:Error?)->Void)->URLSessionDataTask? {
     
-    guard let url = URL(string:urlString) else {
-      return
-    }
-    
-    let urlStringKey = urlString as NSString
-    
-    if let cachedData = MindvalleyImage.dataCache.object(forKey: urlStringKey) {
-      completionHandler(cachedData as AnyObject?, nil)
-      return
-    }
-    
-    let request = URLRequest(url: url)
-    
-    _ = URLSession.shared.dataTask(with: request) { (data,response, downloadError) in
+    if let url = URL(string:urlString) {
       
-      if let error = downloadError {
-        completionHandler(nil, error)
-      } else {
+      let request = URLRequest(url: url)
         
-        let cacheItem = DiscardableDataContent(data: data!)
-        MindvalleyImage.dataCache.setObject(cacheItem, forKey: urlStringKey)
-        completionHandler(data as AnyObject?, nil)
-        
+      let task = URLSession.shared.dataTask(with: request) { (data,response, downloadError) in
+          
+        if let error = downloadError {
+          completionHandler(nil, error)
+        } else {
+          completionHandler(data as AnyObject?, nil)
+        }
+          
       }
-      }.resume()
+        
+      task.resume()
     
+      return task
+    }
     
+    return nil
   }
   
   
+  // MARK: - Shared Image Cache
   
+  struct Caches {
+    static let imageCache = MindValleyCache()
+  }
+
   
   
   

@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK : - MindvalleyConstants
 
 struct MindvalleyConstants {
   
 
+  static let requestedImageListSize = 10
+  
   // MARK : - JSON Response Keys
   
   struct JSONResponseKeys {
@@ -55,5 +58,32 @@ struct MindvalleyConstants {
     }
     
     
+  }
+  
+  // MARK : - Cell ID
+  
+  struct ImageListCollectionViewCell {
+    static let Identifier = "imageListCollectionViewCell"
+    static let BackgroundImageViewCornerRadius:CGFloat = 4
+    static let ProfileImageViewCornerRadius:CGFloat = 4
+    static let ImageListCollectionViewCelllHeight:CGFloat = 180
+  }
+  
+  
+  // MARK : - ImageListVC
+  
+  struct ImageListVC {
+    static let BundleResourceName = "sampleData"
+    static let FileTypeJSON = "json"
+    static let NumberOfColumns:CGFloat = 2
+    static let NumberOfRequestedPostList = 10
+  }
+  
+  struct MindValleyCache {
+    static let MaximumCapacity = 1000
+  }
+  
+  struct Image {
+    static let PlaceHolder = "placeholder"
   }
 }

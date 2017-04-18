@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B8CAF3D51EA0F054003D8A64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF3D41EA0F054003D8A64 /* AppDelegate.swift */; };
-		B8CAF3D71EA0F054003D8A64 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF3D61EA0F054003D8A64 /* ViewController.swift */; };
+		B8CAF3D71EA0F054003D8A64 /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF3D61EA0F054003D8A64 /* ImageListViewController.swift */; };
 		B8CAF3DA1EA0F054003D8A64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8CAF3D81EA0F054003D8A64 /* Main.storyboard */; };
 		B8CAF3DC1EA0F054003D8A64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8CAF3DB1EA0F054003D8A64 /* Assets.xcassets */; };
 		B8CAF3DF1EA0F054003D8A64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8CAF3DD1EA0F054003D8A64 /* LaunchScreen.storyboard */; };
@@ -20,6 +20,7 @@
 		B8CAF4101EA2118F003D8A64 /* ImageListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */; };
 		B8CAF4121EA21729003D8A64 /* sampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = B8CAF4111EA21729003D8A64 /* sampleData.json */; };
 		B8CAF4141EA2177F003D8A64 /* PostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF4131EA2177F003D8A64 /* PostInfo.swift */; };
+		B8F582FA1EA6390200D8F669 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F582F91EA6390200D8F669 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +43,7 @@
 /* Begin PBXFileReference section */
 		B8CAF3D11EA0F054003D8A64 /* Mindvalley application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mindvalley application.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CAF3D41EA0F054003D8A64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B8CAF3D61EA0F054003D8A64 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B8CAF3D61EA0F054003D8A64 /* ImageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewController.swift; sourceTree = "<group>"; };
 		B8CAF3D91EA0F054003D8A64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B8CAF3DB1EA0F054003D8A64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8CAF3DE1EA0F054003D8A64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,6 +60,7 @@
 		B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageListCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8CAF4111EA21729003D8A64 /* sampleData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleData.json; sourceTree = "<group>"; };
 		B8CAF4131EA2177F003D8A64 /* PostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostInfo.swift; sourceTree = "<group>"; };
+		B8F582F91EA6390200D8F669 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +91,6 @@
 		B8CAF3C81EA0F054003D8A64 = {
 			isa = PBXGroup;
 			children = (
-				B8CAF4081EA1D238003D8A64 /* ImageHandling */,
 				B8CAF3D31EA0F054003D8A64 /* Mindvalley application */,
 				B8CAF3E81EA0F054003D8A64 /* Mindvalley applicationTests */,
 				B8CAF3F31EA0F055003D8A64 /* Mindvalley applicationUITests */,
@@ -110,6 +111,8 @@
 		B8CAF3D31EA0F054003D8A64 /* Mindvalley application */ = {
 			isa = PBXGroup;
 			children = (
+				B8CAF4081EA1D238003D8A64 /* Service */,
+				B8F582FB1EA644C200D8F669 /* Cache */,
 				B8CAF4061EA0F138003D8A64 /* MindvalleyConstants.swift */,
 				B8CAF4051EA0F10D003D8A64 /* Controller */,
 				B8CAF4041EA0F0FE003D8A64 /* View */,
@@ -169,18 +172,28 @@
 		B8CAF4051EA0F10D003D8A64 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B8CAF3D61EA0F054003D8A64 /* ViewController.swift */,
+				B8CAF3D61EA0F054003D8A64 /* ImageListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		B8CAF4081EA1D238003D8A64 /* ImageHandling */ = {
+		B8CAF4081EA1D238003D8A64 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				B8CAF40D1EA204C9003D8A64 /* DiscardableImageContent.swift */,
 				B8CAF4091EA1D294003D8A64 /* MindvalleyImage.swift */,
 			);
-			name = ImageHandling;
+			name = Service;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		B8F582FB1EA644C200D8F669 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				B8F582F91EA6390200D8F669 /* ImageCache.swift */,
+				B8CAF40D1EA204C9003D8A64 /* DiscardableImageContent.swift */,
+			);
+			name = Cache;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,10 +336,11 @@
 			files = (
 				B8CAF4101EA2118F003D8A64 /* ImageListCollectionViewCell.swift in Sources */,
 				B8CAF4141EA2177F003D8A64 /* PostInfo.swift in Sources */,
+				B8F582FA1EA6390200D8F669 /* ImageCache.swift in Sources */,
 				B8CAF40A1EA1D294003D8A64 /* MindvalleyImage.swift in Sources */,
 				B8CAF4071EA0F138003D8A64 /* MindvalleyConstants.swift in Sources */,
 				B8CAF40E1EA204C9003D8A64 /* DiscardableImageContent.swift in Sources */,
-				B8CAF3D71EA0F054003D8A64 /* ViewController.swift in Sources */,
+				B8CAF3D71EA0F054003D8A64 /* ImageListViewController.swift in Sources */,
 				B8CAF3D51EA0F054003D8A64 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

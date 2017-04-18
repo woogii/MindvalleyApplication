@@ -11,24 +11,24 @@ import UIKit
 
 // MARK : - DiscardableImageContent : NSObject, NSDiscardableContent
 
-open class DiscardableDataContent : NSObject, NSDiscardableContent {
+open class DiscardableImageContent : NSObject, NSDiscardableContent {
   
   // MARK : - Property
   
-  private(set) public var data : Data?
+  private(set) public var image : UIImage?
   var  accessedCounter : UInt = 0
   
   // MARK : - Initialization
   
-  public init(data:Data) {
-    self.data = data
+  public init(image:UIImage) {
+    self.image = image
   }
 
  
   // MARK : - Accessing Content
   
   public func beginContentAccess() -> Bool {
-    if data == nil {
+    if image == nil {
       return false
     }
     
@@ -46,13 +46,13 @@ open class DiscardableDataContent : NSObject, NSDiscardableContent {
   
   public func discardContentIfPossible() {
     if accessedCounter == 0 {
-      data = nil
+      image = nil
     }
     
   }
   
   public func isContentDiscarded() -> Bool {
-    if data == nil {
+    if image == nil {
       return true
     } else {
       return false

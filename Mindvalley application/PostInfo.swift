@@ -7,13 +7,33 @@
 //
 
 import Foundation
-
+import UIKit
 
 struct PostInfo {
   
   var userName:String?
-  var profileImageUrlString:String
+  var profileImageUrlString:String?
   var backgroundImageUrlString:String?
+  
+  var backgroundImage: UIImage? {
+    get {
+      return MindvalleyImage.Caches.imageCache.retrieveImage(path: backgroundImageUrlString)
+    }
+    
+    set {
+      MindvalleyImage.Caches.imageCache.storeImage(image: newValue, path: backgroundImageUrlString!)
+    }
+  }
+
+  var profileImage: UIImage? {
+    get {
+      return MindvalleyImage.Caches.imageCache.retrieveImage(path: profileImageUrlString)
+    }
+    
+    set {
+      MindvalleyImage.Caches.imageCache.storeImage(image: newValue, path: profileImageUrlString!)
+    }
+  }
   
   init(userName:String, profileImageUrlString:String, backgroundImageUrlString:String) {
     
