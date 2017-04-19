@@ -10,27 +10,106 @@ import XCTest
 @testable import Mindvalley_application
 
 class Mindvalley_applicationTests: XCTestCase {
+  
+  var controllerUnderTest: ImageListViewController!
+  var bundleDataUnderTest:Data!
+  var sessionUnderTest: URLSession!
+  var postInfoUnderTest:[PostInfo]!
+  
+  override func setUp() {
+
+    super.setUp()
+  
+    createTestViewController()
+    createTestBundleData()
+    createTestUrlSession()
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+  }
+  
+  func createTestViewController() {
+    
+    controllerUnderTest = UIStoryboard(name: "Main",
+                                       bundle: nil).instantiateViewController(withIdentifier: "ImageListVC") as! ImageListViewController
+  }
+  
+  func createTestBundleData() {
+    let testBundle = Bundle(for: type(of: self))
+    let path = testBundle.path(forResource: "sampleData", ofType: "json")
+    bundleDataUnderTest = try? Data(contentsOf: URL(fileURLWithPath: path!), options: .alwaysMapped)
+  }
+  
+  func createTestUrlSession() {
+    sessionUnderTest = URLSession(configuration: URLSessionConfiguration.default)
+  }
+  
+  override func tearDown() {
+  
+    clearTestVariables()
+    super.tearDown()
+  }
+  
+  func clearTestVariables() {
+
+    controllerUnderTest = nil
+    bundleDataUnderTest = nil
+    sessionUnderTest = nil
+    postInfoUnderTest = nil
+  }
+  
+  func testLoadDataFromBundle() {
+    
+    controllerUnderTest.loadDataFromBundle()
+    XCTAssertEqual(controllerUnderTest?.posts.count, 10, "couldn't fetch 10 items")
+    
+  }
+  
+  func testDataParsingAfterLoadingDataFromBundle() {
+    
+    do {
+      let dictionaryArray = try(JSONSerialization.jsonObject(with: bundleDataUnderTest!, options: .allowFragments)) as? [[String: AnyObject]]
+      postInfoUnderTest = PostInfo.createPostInfoListFromDictionaryArray(dictionaryArray: dictionaryArray!)
+      
+    
+      XCTAssertEqual(postInfoUnderTest.count, 10, "couldn't parse 10 items from bundle")
+      
+    } catch _ {}
+    
+    
+    
+  }
+  
+  
+  func testImageRequestWithUrlString() {
+    
+    do {
+      let dictionaryArray = try(JSONSerialization.jsonObject(with: bundleDataUnderTest!, options: .allowFragments)) as? [[String: AnyObject]]
+      postInfoUnderTest = PostInfo.createPostInfoListFromDictionaryArray(dictionaryArray: dictionaryArray!)
+      
+    } catch _ {}
+    
+    let url = URL(string: postInfoUnderTest[0].backgroundImageUrlString!)
+    
+    let promise = expectation(description: "Completion handler invoked")
+    var statusCode: Int?
+    var responseError: Error?
+    
+    
+    let dataTask = sessionUnderTest.dataTask(with: url!) { data, response, error in
+      statusCode = (response as? HTTPURLResponse)?.statusCode
+      responseError = error
+    
+      promise.fulfill()
     }
+    dataTask.resume()
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+    waitForExpectations(timeout: 5, handler: nil)
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+    XCTAssertNil(responseError)
+    XCTAssertEqual(statusCode, 200)
+  }
+  
+  
+ 
+  
 }

@@ -14,13 +14,16 @@
 		B8CAF3DF1EA0F054003D8A64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8CAF3DD1EA0F054003D8A64 /* LaunchScreen.storyboard */; };
 		B8CAF3EA1EA0F055003D8A64 /* Mindvalley_applicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF3E91EA0F055003D8A64 /* Mindvalley_applicationTests.swift */; };
 		B8CAF3F51EA0F055003D8A64 /* Mindvalley_applicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF3F41EA0F055003D8A64 /* Mindvalley_applicationUITests.swift */; };
-		B8CAF4071EA0F138003D8A64 /* MindvalleyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF4061EA0F138003D8A64 /* MindvalleyConstants.swift */; };
+		B8CAF4071EA0F138003D8A64 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF4061EA0F138003D8A64 /* Constants.swift */; };
 		B8CAF40A1EA1D294003D8A64 /* MindvalleyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF4091EA1D294003D8A64 /* MindvalleyImage.swift */; };
 		B8CAF40E1EA204C9003D8A64 /* DiscardableImageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF40D1EA204C9003D8A64 /* DiscardableImageContent.swift */; };
 		B8CAF4101EA2118F003D8A64 /* ImageListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */; };
 		B8CAF4121EA21729003D8A64 /* sampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = B8CAF4111EA21729003D8A64 /* sampleData.json */; };
 		B8CAF4141EA2177F003D8A64 /* PostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CAF4131EA2177F003D8A64 /* PostInfo.swift */; };
-		B8F582FA1EA6390200D8F669 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F582F91EA6390200D8F669 /* ImageCache.swift */; };
+		B8F582FA1EA6390200D8F669 /* MindValleyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F582F91EA6390200D8F669 /* MindValleyCache.swift */; };
+		B8F582FD1EA703B300D8F669 /* MindvalleyImageConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F582FC1EA703B300D8F669 /* MindvalleyImageConvenience.swift */; };
+		B8F583001EA7221D00D8F669 /* DiscardableDataContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F582FF1EA7221D00D8F669 /* DiscardableDataContent.swift */; };
+		B8F583331EA78A8100D8F669 /* sampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = B8F583321EA78A8100D8F669 /* sampleData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,13 +57,16 @@
 		B8CAF3F01EA0F055003D8A64 /* Mindvalley applicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mindvalley applicationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CAF3F41EA0F055003D8A64 /* Mindvalley_applicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mindvalley_applicationUITests.swift; sourceTree = "<group>"; };
 		B8CAF3F61EA0F055003D8A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8CAF4061EA0F138003D8A64 /* MindvalleyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindvalleyConstants.swift; sourceTree = "<group>"; };
+		B8CAF4061EA0F138003D8A64 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B8CAF4091EA1D294003D8A64 /* MindvalleyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindvalleyImage.swift; sourceTree = "<group>"; };
 		B8CAF40D1EA204C9003D8A64 /* DiscardableImageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscardableImageContent.swift; sourceTree = "<group>"; };
 		B8CAF40F1EA2118F003D8A64 /* ImageListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageListCollectionViewCell.swift; sourceTree = "<group>"; };
 		B8CAF4111EA21729003D8A64 /* sampleData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleData.json; sourceTree = "<group>"; };
 		B8CAF4131EA2177F003D8A64 /* PostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostInfo.swift; sourceTree = "<group>"; };
-		B8F582F91EA6390200D8F669 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		B8F582F91EA6390200D8F669 /* MindValleyCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindValleyCache.swift; sourceTree = "<group>"; };
+		B8F582FC1EA703B300D8F669 /* MindvalleyImageConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MindvalleyImageConvenience.swift; sourceTree = "<group>"; };
+		B8F582FF1EA7221D00D8F669 /* DiscardableDataContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscardableDataContent.swift; sourceTree = "<group>"; };
+		B8F583321EA78A8100D8F669 /* sampleData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,13 +117,13 @@
 		B8CAF3D31EA0F054003D8A64 /* Mindvalley application */ = {
 			isa = PBXGroup;
 			children = (
-				B8CAF4081EA1D238003D8A64 /* Service */,
+				B8F582FE1EA70A0200D8F669 /* Constant */,
+				B8CAF4081EA1D238003D8A64 /* NetworkService */,
 				B8F582FB1EA644C200D8F669 /* Cache */,
-				B8CAF4061EA0F138003D8A64 /* MindvalleyConstants.swift */,
 				B8CAF4051EA0F10D003D8A64 /* Controller */,
 				B8CAF4041EA0F0FE003D8A64 /* View */,
 				B8CAF4031EA0F0F3003D8A64 /* Model */,
-				B8CAF3D81EA0F054003D8A64 /* Main.storyboard */,
+				B8F583311EA77D9A00D8F669 /* Storyboard */,
 				B8CAF4021EA0F0D6003D8A64 /* Supporting Files */,
 			);
 			path = "Mindvalley application";
@@ -127,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				B8CAF3E91EA0F055003D8A64 /* Mindvalley_applicationTests.swift */,
+				B8F583321EA78A8100D8F669 /* sampleData.json */,
 				B8CAF3EB1EA0F055003D8A64 /* Info.plist */,
 			);
 			path = "Mindvalley applicationTests";
@@ -177,23 +184,41 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		B8CAF4081EA1D238003D8A64 /* Service */ = {
+		B8CAF4081EA1D238003D8A64 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
 				B8CAF4091EA1D294003D8A64 /* MindvalleyImage.swift */,
+				B8F582FC1EA703B300D8F669 /* MindvalleyImageConvenience.swift */,
 			);
-			name = Service;
+			name = NetworkService;
 			path = ..;
 			sourceTree = "<group>";
 		};
 		B8F582FB1EA644C200D8F669 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
-				B8F582F91EA6390200D8F669 /* ImageCache.swift */,
+				B8F582F91EA6390200D8F669 /* MindValleyCache.swift */,
 				B8CAF40D1EA204C9003D8A64 /* DiscardableImageContent.swift */,
+				B8F582FF1EA7221D00D8F669 /* DiscardableDataContent.swift */,
 			);
 			name = Cache;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		B8F582FE1EA70A0200D8F669 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				B8CAF4061EA0F138003D8A64 /* Constants.swift */,
+			);
+			name = Constant;
+			sourceTree = "<group>";
+		};
+		B8F583311EA77D9A00D8F669 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				B8CAF3D81EA0F054003D8A64 /* Main.storyboard */,
+			);
+			name = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F583331EA78A8100D8F669 /* sampleData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,12 +360,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8F583001EA7221D00D8F669 /* DiscardableDataContent.swift in Sources */,
 				B8CAF4101EA2118F003D8A64 /* ImageListCollectionViewCell.swift in Sources */,
 				B8CAF4141EA2177F003D8A64 /* PostInfo.swift in Sources */,
-				B8F582FA1EA6390200D8F669 /* ImageCache.swift in Sources */,
+				B8F582FA1EA6390200D8F669 /* MindValleyCache.swift in Sources */,
 				B8CAF40A1EA1D294003D8A64 /* MindvalleyImage.swift in Sources */,
-				B8CAF4071EA0F138003D8A64 /* MindvalleyConstants.swift in Sources */,
+				B8CAF4071EA0F138003D8A64 /* Constants.swift in Sources */,
 				B8CAF40E1EA204C9003D8A64 /* DiscardableImageContent.swift in Sources */,
+				B8F582FD1EA703B300D8F669 /* MindvalleyImageConvenience.swift in Sources */,
 				B8CAF3D71EA0F054003D8A64 /* ImageListViewController.swift in Sources */,
 				B8CAF3D51EA0F054003D8A64 /* AppDelegate.swift in Sources */,
 			);

@@ -22,6 +22,13 @@ class ImageListViewController: UICollectionViewController {
     refreshControl.addTarget(self, action: #selector(ImageListViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
     return refreshControl
   }()
+  let RFC3339DateFormatter : DateFormatter = {
+    let dateFormater = DateFormatter()
+    dateFormater.locale = Locale(identifier: Constants.ImageListVC.USPosixLocale)
+    dateFormater.dateFormat = Constants.ImageListVC.JsonDateFormat
+    dateFormater.timeZone = TimeZone(secondsFromGMT: 0)
+    return dateFormater
+  }()
   
   // MARK : - View Life Cycle
   
@@ -29,7 +36,7 @@ class ImageListViewController: UICollectionViewController {
     super.viewDidLoad()
     
     addRefreshControl()
-    fetchDataFromBundle()
+    loadDataFromBundle()
   }
   
   func addRefreshControl() {
@@ -42,19 +49,24 @@ class ImageListViewController: UICollectionViewController {
     
   }
   
+  // MARK : - Action Method
+  
   func handleRefresh(_ refreshControlForCollectionView:UIRefreshControl) {
     initList()
-    fetchDataFromBundle()
+    loadDataFromBundle()
   }
+  
+  // MARK : - Initialize CollectionView DataSource
   
   func initList() {
     posts = []
   }
   
+  // MARK : - Load JSON
   
-  func fetchDataFromBundle() {
+  func loadDataFromBundle() {
     
-    if let path = Bundle.main.path(forResource: MindvalleyConstants.ImageListVC.BundleResourceName, ofType: MindvalleyConstants.ImageListVC.FileTypeJSON) {
+    if let path = Bundle.main.path(forResource: Constants.ImageListVC.BundleResourceName, ofType: Constants.ImageListVC.FileTypeJSON) {
       
       do {
         
@@ -77,6 +89,8 @@ class ImageListViewController: UICollectionViewController {
     
   }
   
+  // MARK : - End Refreshing
+  
   func stopRefreshControl() {
     
     if #available(iOS 10.0, *) {
@@ -87,7 +101,7 @@ class ImageListViewController: UICollectionViewController {
     
   }
   
-  // MARK : - ImageListViewController: UICollectionView DataSource
+  // MARK : - UICollectionView DataSource Methods
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return posts.count
@@ -95,25 +109,32 @@ class ImageListViewController: UICollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    var post = posts[indexPath.row]
-    var bgImage:UIImage? =  UIImage(named: MindvalleyConstants.Image.PlaceHolder)
-    var profileImage:UIImage? = UIImage(named:MindvalleyConstants.Image.PlaceHolder)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.ImageListCollectionViewCell.Identifier, for: indexPath) as! ImageListCollectionViewCell
     
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MindvalleyConstants.ImageListCollectionViewCell.Identifier, for: indexPath) as! ImageListCollectionViewCell
+    configureImageListCollectionViewCell(cell: cell, indexPath:indexPath)
+    
+    return cell
+  }
+
+  // MARK : - Configure CollectionViewcell
   
+  func configureImageListCollectionViewCell(cell:ImageListCollectionViewCell, indexPath:IndexPath) {
     
-    cell.creatorLabel.text = post.userName
+    var post = posts[indexPath.row]
+    
+    var bgImage:UIImage? =  nil
+    var profileImage:UIImage? = nil
+    
     cell.backgroundImageView.image = nil
     cell.profileImageView.image = nil
     
-  
+    
     if post.backgroundImage != nil && post.profileImage != nil {
       bgImage = post.backgroundImage
       profileImage = post.profileImage
     } else {
       
-      
-      let bgImageRequestTask = MindvalleyImage.sharedInstance.requestImageWith(urlString: post.backgroundImageUrlString!, completionHandler: { (result,error) in
+      let bgImageRequestTask = MindvalleyImage.sharedInstance.fetchImageList(urlString: post.backgroundImageUrlString!, size: Constants.Public.DefaultListSize, completionHandler: { (result,error) in
         
         if error != nil {
           
@@ -124,25 +145,27 @@ class ImageListViewController: UICollectionViewController {
             let backgroundImage = UIImage(data:data)
             post.backgroundImage = backgroundImage
             
-            
-            let profileImageRequestTask = MindvalleyImage.sharedInstance.requestImageWith(urlString: post.profileImageUrlString!, completionHandler: { (result,error) in
-            
-            
+            let profileImageRequestTask = MindvalleyImage.sharedInstance.fetchImageList(urlString: post.profileImageUrlString!, size: Constants.Public.DefaultListSize, completionHandler: { (result,error) in
+              
               if let data = result as? Data {
-              
-                let profileImage = UIImage(data: data)
-                post.profileImage = profileImage
-              
-                DispatchQueue.main.async {
-                  cell.backgroundImageView.image = backgroundImage
-                  cell.profileImageView.image = profileImage
-                }
                 
+                let profileImage = UIImage(data: data)
+                
+                post.profileImage = profileImage
+                
+                UIView.transition(with: cell.backgroundImageView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                  
+                  DispatchQueue.main.async {
+                    cell.backgroundImageView.image = backgroundImage
+                    cell.profileImageView.image = profileImage
+                  }
+                  
+                }, completion: nil)
+              
               }
-          
+              
             })
             cell.taskToCancelifCellIsReused = profileImageRequestTask
-            
           }
         }
       })
@@ -151,10 +174,12 @@ class ImageListViewController: UICollectionViewController {
       
     }
     
+    cell.creatorLabel.text = post.userName
+    cell.numberOfLikesLabel.text = String(post.numberOfLikes ?? 0)
     cell.backgroundImageView.image = bgImage
     cell.profileImageView.image = profileImage
+    cell.timeInfoLabel.text = RFC3339DateFormatter.date(from:post.timeInfo ?? "")?.timeAgoDisplay()
     
-    return cell
   }
   
   // MARK: - UIScrollViewDelegate
@@ -174,15 +199,15 @@ class ImageListViewController: UICollectionViewController {
           isRequesting = true
           loadMoreImageList()
         }
-        
       }
     }
   }
   
+  // MARK : - Load More List
+  
   func loadMoreImageList() {
     
-    
-    if let path = Bundle.main.path(forResource: MindvalleyConstants.ImageListVC.BundleResourceName, ofType: MindvalleyConstants.ImageListVC.FileTypeJSON) {
+    if let path = Bundle.main.path(forResource: Constants.ImageListVC.BundleResourceName, ofType: Constants.ImageListVC.FileTypeJSON) {
       
       do {
         
@@ -208,13 +233,8 @@ class ImageListViewController: UICollectionViewController {
           print(err)
         #endif 
       }
-      
     }
-    
-    
   }
-  
-  
 }
 
 // MARK : - ImageListViewController: UICollectionViewDelegateFlowLayout
@@ -223,13 +243,39 @@ extension ImageListViewController : UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-    return CGSize(width: collectionView.frame.size.width/MindvalleyConstants.ImageListVC.NumberOfColumns, height: MindvalleyConstants.ImageListCollectionViewCell.ImageListCollectionViewCelllHeight)
+    return CGSize(width: collectionView.frame.size.width/Constants.ImageListVC.NumberOfColumns, height: Constants.ImageListCollectionViewCell.ImageListCollectionViewCelllHeight)
     
   }
   
 }
 
+// MARK : - Date Extension
 
+extension Date {
+  
+  func timeAgoDisplay()-> String {
+    
+    let secondsAgo = Int(Date().timeIntervalSince(self))
+    
+    let minute = 60
+    let hour = 60 * minute
+    let day = 24 * hour
+    let week = 7 * day
+    
+    if secondsAgo < minute {
+      return "\(secondsAgo) seconds ago"
+    } else if secondsAgo < hour {
+      return "\(secondsAgo/minute) minutes ago"
+    } else if secondsAgo < day {
+      return "\(secondsAgo/hour) hours ago"
+    } else if secondsAgo < week {
+      return "\(secondsAgo/day) days ago"
+    }
+    
+    return "\(secondsAgo/week) weeks ago"
+  }
+  
+}
 
 
 

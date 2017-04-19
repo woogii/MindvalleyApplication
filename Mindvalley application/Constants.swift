@@ -9,15 +9,24 @@
 import Foundation
 import UIKit
 
-// MARK : - MindvalleyConstants
+// MARK : - Constants
 
-struct MindvalleyConstants {
+struct Constants {
   
-
-  static let requestedImageListSize = 10
+  // MARK : - Public Constants
+  
+  struct Public {
+    static let DefaultListSize = 10
+  }
+  
+  // MARK : - Storyboard Name
+  
+  struct StoryboardName {
+    static let Main = "Main"
+  }
   
   // MARK : - JSON Response Keys
-  
+ 
   struct JSONResponseKeys {
     
     // MARK : - General Keys 
@@ -51,12 +60,31 @@ struct MindvalleyConstants {
     
     }
     
+    struct UserCollectionInfo {
+      static let UserCollections = "current_user_collections"
+    }
+    
     // MARK : - Category Information
     
     struct CategoryInfo {
       
+      static let Categories = "categories"
+      static let Id = "id"
+      static let Title = "title"
+      static let PhotoCount = "photo_count"
+      static let Links = "links"
+      static let SelfKey = "self"
+      static let Photos = "photos"
+      
     }
     
+    // MARK : - Error Information
+    
+    struct ErrorInfo {
+      static let Code = "ErrCode"
+      static let Message = "ErrMessage"
+      static let Domain = "MindValleyImage Error"
+    }
     
   }
   
@@ -66,7 +94,9 @@ struct MindvalleyConstants {
     static let Identifier = "imageListCollectionViewCell"
     static let BackgroundImageViewCornerRadius:CGFloat = 4
     static let ProfileImageViewCornerRadius:CGFloat = 4
-    static let ImageListCollectionViewCelllHeight:CGFloat = 180
+    static let ContentBackgroundViewCornerRadius:CGFloat = 3
+    static let ContentBackgroundViewShadowOpacity:Float = 0.8
+    static let ImageListCollectionViewCelllHeight:CGFloat = 225
   }
   
   
@@ -75,15 +105,18 @@ struct MindvalleyConstants {
   struct ImageListVC {
     static let BundleResourceName = "sampleData"
     static let FileTypeJSON = "json"
+    static let USPosixLocale = "en_US_POSIX"
+    static let JsonDateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
     static let NumberOfColumns:CGFloat = 2
     static let NumberOfRequestedPostList = 10
   }
   
   struct MindValleyCache {
-    static let MaximumCapacity = 1000
+    static let MaximumCapacity = 500
   }
   
   struct Image {
     static let PlaceHolder = "placeholder"
   }
+  
 }
