@@ -66,18 +66,19 @@ class ImageListViewController: UICollectionViewController {
   
   func loadDataFromBundle() {
     
-    if let path = Bundle.main.path(forResource: Constants.ImageListVC.BundleResourceName, ofType: Constants.ImageListVC.FileTypeJSON) {
+    if let pathUrl = Bundle.main.url(forResource: Constants.ImageListVC.BundleResourceName, withExtension: "json") {
       
       do {
         
-        let data = try(Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe))
+        let data = try Data(contentsOf: pathUrl)
         
-        let dictionaryArray = try(JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String: AnyObject]]
+        if let dictionaryArray = try(JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String: Any]] {
+          
+          posts = dictionaryArray.flatMap(PostInfo.init)
         
-        posts = PostInfo.createPostInfoListFromDictionaryArray(dictionaryArray: dictionaryArray!)
-        
-        DispatchQueue.main.async {
-          self.collectionView?.reloadData()
+          DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+          }
         }
       } catch let err {
         #if DEBUG
@@ -115,7 +116,7 @@ class ImageListViewController: UICollectionViewController {
     
     return cell
   }
-
+  
   // MARK : - Configure CollectionViewcell
   
   func configureImageListCollectionViewCell(cell:ImageListCollectionViewCell, indexPath:IndexPath) {
@@ -161,7 +162,7 @@ class ImageListViewController: UICollectionViewController {
                   }
                   
                 }, completion: nil)
-              
+                
               }
               
             })
@@ -213,25 +214,28 @@ class ImageListViewController: UICollectionViewController {
         
         let data = try(Data(contentsOf: URL(fileURLWithPath: path), options: NSData.ReadingOptions.mappedIfSafe))
         
-        let dictionaryArray = try(JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String: AnyObject]]
-        
-        let addedPosts = PostInfo.createPostInfoListFromDictionaryArray(dictionaryArray: dictionaryArray!)
-        
-        if addedPosts.count == 0 {
-          self.isLastPage = true
-          return
-        }
-        
-        self.posts.append(contentsOf: addedPosts)
-        
-        DispatchQueue.main.async {
-          self.collectionView?.reloadData()
-          self.isRequesting = false
+        if let dictionaryArray = try(JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [[String: Any]] {
+          
+          
+          let addedPosts = dictionaryArray.flatMap(PostInfo.init)
+          
+          if addedPosts.count == 0 {
+            self.isLastPage = true
+            return
+          }
+          
+          self.posts.append(contentsOf: addedPosts)
+          
+          DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            self.isRequesting = false
+          }
+          
         }
       } catch let err {
         #if DEBUG
           print(err)
-        #endif 
+        #endif
       }
     }
   }

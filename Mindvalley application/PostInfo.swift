@@ -47,43 +47,19 @@ struct PostInfo {
   }
   
   // MARK : - Initialization 
-  
-  init(userName:String, profileImageUrlString:String, backgroundImageUrlString:String, numberOfLikes:Int, timeInfo:String) {
     
-    self.userName = userName
-    self.profileImageUrlString = profileImageUrlString
-    self.backgroundImageUrlString = backgroundImageUrlString
-    self.numberOfLikes = numberOfLikes
-    self.timeInfo = timeInfo
-  
-  }
-  
-  // MARK : - Create Model Array
-  
-  static func createPostInfoListFromDictionaryArray(dictionaryArray:[[String:AnyObject]])-> [PostInfo] {
- 
-    var postInfoArray = [PostInfo]()
+  init?(dictionary:[String:Any]) {
     
-    for dict in dictionaryArray {
-      
-      guard let userInfo = dict[Constants.JSONResponseKeys.UserInfo.User] as? [String:AnyObject], let profileImageInfo = userInfo[Constants.JSONResponseKeys.UserInfo.ProfileImage] as? [String:AnyObject],let backgroundImageInfo = dict[Constants.JSONResponseKeys.UrlInfo.Urls] as? [String:AnyObject] else {
-        return postInfoArray
-      }
-    
-      let userName = userInfo[Constants.JSONResponseKeys.UserInfo.UserName] as? String
-      let profileImageUrlString = profileImageInfo[Constants.JSONResponseKeys.UrlInfo.SmallImage] as? String
-      let backgroundImageUrlString = backgroundImageInfo[Constants.JSONResponseKeys.UrlInfo.ThumbnailImage] as? String
-      let numberOfLikes = dict[Constants.JSONResponseKeys.LikesCount] as? Int
-      let timeInfo = dict[Constants.JSONResponseKeys.CreatedAt] as? String
-      
-      let postInfo = PostInfo(userName: userName ?? "", profileImageUrlString: profileImageUrlString ?? "", backgroundImageUrlString: backgroundImageUrlString ?? "", numberOfLikes: numberOfLikes ?? 0,
-                              timeInfo: timeInfo ?? "")
-      
-      postInfoArray.append(postInfo)
+    guard let userInfo = dictionary[Constants.JSONResponseKeys.UserInfo.User] as? [String:AnyObject], let profileImageInfo = userInfo[Constants.JSONResponseKeys.UserInfo.ProfileImage] as? [String:AnyObject],let backgroundImageInfo = dictionary[Constants.JSONResponseKeys.UrlInfo.Urls] as? [String:AnyObject] else {
+      return nil
     }
     
-    return postInfoArray
+    self.userName = userInfo[Constants.JSONResponseKeys.UserInfo.UserName] as? String
+    self.profileImageUrlString = profileImageInfo[Constants.JSONResponseKeys.UrlInfo.SmallImage] as? String
+    self.backgroundImageUrlString = backgroundImageInfo[Constants.JSONResponseKeys.UrlInfo.ThumbnailImage] as? String
+    self.numberOfLikes = dictionary[Constants.JSONResponseKeys.LikesCount] as? Int
+    self.timeInfo = dictionary[Constants.JSONResponseKeys.CreatedAt] as? String
+    
   }
-  
   
 }

@@ -36,6 +36,8 @@ open class DiscardableDataContent : NSObject, NSDiscardableContent {
     return true
   }
   
+  
+  
   public func endContentAccess() {
     if accessedCounter > 0 {
       accessedCounter -= 1
